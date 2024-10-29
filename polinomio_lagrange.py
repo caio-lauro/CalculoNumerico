@@ -26,7 +26,7 @@ class Polinomio:
         grausX:list[Number] = [x**i for i in range(self.Grau, -1, -1)]
         
         valorNumerico: Number = reduce(lambda a, b: a + b, [grausX[i] * self.coeficientes[i] for i in range(self.Grau + 1)])
-        return valorNumerico
+        return round(valorNumerico, self.precisao)
     
     def getCoeficientes(self):
         x = sympy.Symbol('x')
