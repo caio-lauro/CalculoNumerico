@@ -14,7 +14,23 @@ class Polinomio:
         self.coeficientes:list[Number] = list(map(lambda x: round(x, self.precisao), self.getCoeficientes()))
     
     def __str__(self) -> str:
-        return f"Coeficientes do polinômio (ordem decrescente de grau) = {self.coeficientes}"
+        s = f"P{self.Grau}(x) = "
+        for i in range(len(self.coeficientes) - 1):
+            if i > 0 and self.coeficientes[i] > 0:
+                s += ' + '
+            elif i > 0 and self.coeficientes[i] < 0:
+                s += ' - '
+
+            s += f"{abs(self.coeficientes[i])}x" if abs(self.coeficientes[i]) != 1.0 else "x"
+            if self.Grau - i > 1:
+                s += f"^{self.Grau - i}"
+
+        if self.coeficientes[-1] > 0:
+            s += f' + {self.coeficientes[-1]}'
+        elif self.coeficientes[-1] < 0:
+            s += f' - {-self.coeficientes[-1]}'
+
+        return s
     
     def interpolarX(self, x: Number) -> Number:
         minX:Number = min(self.valoresX)
