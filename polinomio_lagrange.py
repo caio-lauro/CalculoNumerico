@@ -16,6 +16,9 @@ class Polinomio:
     def __str__(self) -> str:
         s = f"P{self.Grau}(x) = "
         for i in range(len(self.coeficientes) - 1):
+            if self.coeficientes[i] == 0:
+                continue
+
             if i > 0 and self.coeficientes[i] > 0:
                 s += ' + '
             elif i > 0 and self.coeficientes[i] < 0:
@@ -63,19 +66,6 @@ class Polinomio:
             termos.append(termo)
 
         polinomio = reduce(lambda x, y: x + y, termos)
-        coeficientes = list(map(lambda x: float(x), polinomio.as_poly().coeffs()))
+        coeficientes = list(map(lambda x: float(x), polinomio.as_poly().all_coeffs()))
 
         return coeficientes
-
-pontosExercicios = [
-    [(-1, 14.5), (0, 7.5), (1.5, 4.5)],
-    [(0, 5), (2, -3), (4, 13)],
-    [(0, 2), (0.3, 2.405), (0.5, 2.8244), (0.9, 4.2136)],
-]
-
-for pontos in pontosExercicios:
-    pnx = Polinomio(pontos)
-    print(pnx)
-    x = 2
-    interpolacao = pnx.interpolarX(x)
-    print(f"Interpolacao para x = {x} é: {interpolacao}\n")
